@@ -74,6 +74,8 @@ export default class Swipeable extends PureComponent {
     onRef: PropTypes.func,
     onPanAnimatedValueRef: PropTypes.func,
     swipeStartMinDistance: PropTypes.number,
+    onPanResponderTerminate: PropTypes.func,
+    onPanResponderTerminationRequest: PropTypes.func,
 
     // styles
     style: ViewPropTypes.style,
@@ -429,8 +431,8 @@ export default class Swipeable extends PureComponent {
     onPanResponderGrant: this._handlePanResponderStart,
     onPanResponderMove: this._handlePanResponderMove,
     onPanResponderRelease: this._handlePanResponderEnd,
-    onPanResponderTerminate: this._handlePanResponderEnd,
-    onPanResponderTerminationRequest: this._handlePanResponderEnd
+    onPanResponderTerminate: this.props.onPanResponderTerminate || this._handlePanResponderEnd,
+    onPanResponderTerminationRequest: this.props.onPanResponderTerminationRequest || this._handlePanResponderEnd
   });
 
   _handleLayout = ({ nativeEvent: { layout: { width } } }) => this.setState({ width });
